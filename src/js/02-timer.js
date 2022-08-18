@@ -18,31 +18,25 @@ let startId = null;
 let selected = null;
 let currentDate = null;
 startBtn.setAttribute('disabled', 'disabled');
+
 startBtn.addEventListener('click', startCountdown);
 
 
 function startCountdown() {
   startBtn.setAttribute('disabled', 'disabled');
+  startBtn.classList.remove('startr_btn--active');
   startId = setInterval(() => {
     if (selected < Date.now()) {
       countdownEndsNotification();
     }
     timeLogic(selected);
-  }, 1000);
-  
+  }, 1000); 
 }
 
 function countdownEndsNotification () {
-      console.log("aф");
       clearInterval(startId);
       Notiflix.Notify.success('Timer is up');
 }
-
-// class CountdownTimer {
-//     constructor(countdownDate) {
-//       this.countdownDate = countdownDate;
-//   }
-// }
 
 function timeLogic(selected) {
   const currentDate = Date.now();
@@ -65,9 +59,9 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    selected = selectedDates[0].getTime();
-    currentDate = Date.now();
-    checkDate(currentDate, selected);
+  selected = selectedDates[0].getTime();
+  currentDate = Date.now();
+  checkDate(currentDate, selected);
   },
 };
 
@@ -101,8 +95,9 @@ function checkDate(currentDate, selected) {
     return;
   }
   startBtn.removeAttribute('disabled');
+  startBtn.classList.add('startr_btn--active');
   
 }
-console.log(convertMs(Date.now())); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+// console.log(convertMs()); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 // console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 // console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}

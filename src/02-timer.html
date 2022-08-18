@@ -4,14 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countdown timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Silkscreen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/common.css" />
   </head>
   <body>
     <p><a href="index.html">Go back</a></p>
-
-    <input type="text" id="datetime-picker" />
-    <button type="button" data-start>Start</button>
-
+    
+    <div class="main_wrapper">
+      <div class="wrapper">
+      <input type="text" id="datetime-picker" />
+      <button class="startr_btn " type="button" data-start>Start</button>
+    </div>
+    
     <div class="timer">
       <div class="field">
         <span class="value" data-days>00</span>
@@ -30,6 +36,8 @@
         <span class="label">Seconds</span>
       </div>
     </div>
+    </div>
+    
 
     <script src="js/02-timer.js" type="module"></script>
   </body>
