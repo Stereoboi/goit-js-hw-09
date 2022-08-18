@@ -16,6 +16,7 @@ const { dateInput, startBtn, days, hours, minutes, seconds } = refs;
 
 let startId = null;
 let selected = null;
+let currentDate = null;
 startBtn.setAttribute('disabled', 'disabled');
 startBtn.addEventListener('click', startCountdown);
 
