@@ -15,6 +15,7 @@ const refs = {
 const { dateInput, startBtn, days, hours, minutes, seconds } = refs;
 
 let startId = null;
+let selected = null;
 startBtn.setAttribute('disabled', 'disabled');
 startBtn.addEventListener('click', startCountdown);
 
@@ -28,17 +29,13 @@ function startCountdown() {
     timeLogic(selected);
   }, 1000);
   
-  
 }
-
 
 function countdownEndsNotification () {
       console.log("aф");
       clearInterval(startId);
       Notiflix.Notify.success('Timer is up');
 }
-    
-
 
 // class CountdownTimer {
 //     constructor(countdownDate) {
@@ -67,14 +64,11 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates);
-    selected = this.selectedDates[0].getTime();
+    selected = selectedDates[0].getTime();
     currentDate = Date.now();
     checkDate(currentDate, selected);
   },
 };
-
-console.log();
 
 flatpickr(dateInput, options);
 
