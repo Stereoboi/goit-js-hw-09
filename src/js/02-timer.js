@@ -22,10 +22,10 @@ startBtn.addEventListener('click', startCountdown);
 function startCountdown() {
   startBtn.setAttribute('disabled', 'disabled');
   startId = setInterval(() => {
-    if (selectedDate < Date.now()) {
+    if (selected < Date.now()) {
       countdownEndsNotification();
     }
-    timeLogic(selectedDate);
+    timeLogic(selected);
   }, 1000);
   
   
@@ -46,10 +46,10 @@ function countdownEndsNotification () {
 //   }
 // }
 
-function timeLogic(selectedDate) {
+function timeLogic(selected) {
   const currentDate = Date.now();
-  const deltaTime = convertMs(selectedDate - currentDate);
-  if (selectedDate > currentDate) {
+  const deltaTime = convertMs(selected - currentDate);
+  if (selected > currentDate) {
     updateTimeInterface(deltaTime);
   }
 }
@@ -67,9 +67,9 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    selectedDate = selectedDates[0].getTime();
+    selected = selectedDates[0].getTime();
     currentDate = Date.now();
-    checkDate(currentDate, selectedDate);
+    checkDate(currentDate, selected);
 
   },
 };
@@ -97,8 +97,8 @@ function convertMs(ms) {
     return String(value).padStart(2, '0');
 }
   
-function checkDate(currentDate, selectedDate) {
-  if (currentDate > selectedDate) {
+function checkDate(currentDate, selected) {
+  if (currentDate > selected) {
     Notiflix.Notify.failure('Please choose a date in the future');
     startBtn.setAttribute('disabled', 'disabled');
     return;
