@@ -33,7 +33,7 @@ function startCountdown() {
 
 
 function countdownEndsNotification () {
-      console.log("a");
+      console.log("aф");
       clearInterval(startId);
       Notiflix.Notify.success('ЧАС ВИЙШОВ');
 }
