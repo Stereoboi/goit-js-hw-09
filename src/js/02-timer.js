@@ -66,14 +66,11 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  selected: null,
   onClose(selectedDates) {
     console.log(selectedDates);
-    selected = selectedDates[0].getTime();
-    console.log(selectedDates[0].getTime());
+    selected = this.selectedDates[0].getTime();
     currentDate = Date.now();
     checkDate(currentDate, selected);
-
   },
 };
 
