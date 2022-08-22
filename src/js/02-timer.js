@@ -15,7 +15,7 @@ const refs = {
 const { dateInput, startBtn, days, hours, minutes, seconds } = refs;
 
 let startId = null;
-let selected = null;
+let countdownTimer = null;
 let currentDate = null;
 startBtn.setAttribute('disabled', 'disabled');
 
@@ -26,11 +26,13 @@ function startCountdown() {
   startBtn.setAttribute('disabled', 'disabled');
   startBtn.classList.remove('startr_btn--active');
   startId = setInterval(() => {
-    if (selected < Date.now()) {
+    if (countdownTimer < Date.now()) {
       countdownEndsNotification();
     }
-    timeLogic(selected);
+    timeLogic(countdownTimer);
   }, 1000); 
+  
+  
 }
 
 function countdownEndsNotification () {
@@ -38,10 +40,10 @@ function countdownEndsNotification () {
       Notiflix.Notify.success('Timer is up');
 }
 
-function timeLogic(selected) {
+function timeLogic(countdownTimer) {
   const currentDate = Date.now();
-  const deltaTime = convertMs(selected - currentDate);
-  if (selected > currentDate) {
+  const deltaTime = convertMs(countdownTimer - currentDate);
+  if (countdownTimer > currentDate) {
     updateTimeInterface(deltaTime);
   }
 }
@@ -55,13 +57,14 @@ function updateTimeInterface(deltaTime) {
   
 const options = {
   enableTime: true,
+  clickOpens: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-  selected = selectedDates[0].getTime();
+  countdownTimer = selectedDates[0].getTime();
   currentDate = Date.now();
-  checkDate(currentDate, selected);
+  checkDate(currentDate, countdownTimer);
   },
 };
 
@@ -88,16 +91,12 @@ function convertMs(ms) {
     return String(value).padStart(2, '0');
 }
   
-function checkDate(currentDate, selected) {
-  if (currentDate > selected) {
+function checkDate(currentDate, countdownTimer) {
+  if (currentDate > countdownTimer) {
     Notiflix.Notify.failure('Please choose a date in the future');
     startBtn.setAttribute('disabled', 'disabled');
     return;
   }
   startBtn.removeAttribute('disabled');
   startBtn.classList.add('startr_btn--active');
-  
 }
-// console.log(convertMs()); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
